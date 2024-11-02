@@ -1,3 +1,3 @@
 ##  AFYAHUB - SOFTTWARE SOLUTION FOR TEAMS COLLABORATION
 
-#Project Idea
+Project Structure 
