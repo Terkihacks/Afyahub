@@ -58,3 +58,4 @@ exports.LoginEmployee = async(req,res) =>{
    } 
 }
 
+//Delete an Employee
