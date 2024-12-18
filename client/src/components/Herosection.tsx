@@ -4,7 +4,7 @@ export default function Herosection(){
             <h1 className="twxt-4xl sm:text-6xl lg:text-7xl text-centre tracking-wide">
                 Afyahub Collaborative Tool
             </h1>
-            <span className="bg-gradient">For Medical </span>
+            <span className="bg-gradient">For Medical Personnel </span>
 
         </div>
     );
