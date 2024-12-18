@@ -59,3 +59,10 @@ exports.LoginEmployee = async(req,res) =>{
 }
 
 //Delete an Employee
+exports.DeleteEmployee = async(req,res) =>{
+    try{
+
+    }catch(error){
+        
+    }
+}
