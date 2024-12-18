@@ -10,7 +10,7 @@ export default function Navbar(){
     };
 return (
 <>
-<nav className="sticky top-0 z-50 py-3 backdrop-blur-lg border-neutral-700/80 ">
+<nav className="sticky top-0 z-50 py-4 backdrop-blur-lg border-neutral-700/80 ">
 <div className="container px-4 mx-auto relative text-sm">
     <div className="flex justify-between items-centre">
         <div className="flex items-centre flex-shrink-0">
@@ -32,7 +32,7 @@ return (
             </a>
         </div>
         {/* Mobile menu */}
-        <div className="lg:hidden md:flex flex-col justify-end">
+        <div className="lg:hidden md:flex flex-col justify-end border border-white rounded-md ">
             <button onClick={toggleNavbar}>
                 {mobileHamOpen ? <X/> :<Menu/>}
             </button>
