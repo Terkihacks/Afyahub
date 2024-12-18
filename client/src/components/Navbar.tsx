@@ -1,7 +1,7 @@
 import{Menu,X} from "lucide-react"
 import { useState } from "react"
 import logo from '../assets/Logo1.jpg'
-import { navItems } from '../data/dummyData'
+import { navItems } from '../data/webData'
 export default function Navbar(){
     
     const[mobileHamOpen,SetmobileHamOpen] = useState(false);
