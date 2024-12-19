@@ -15,7 +15,11 @@ price:string,
 features:string[]
 }
 export interface footerTypes{
-    //Navbar types 
+    //footer types 
     text:string,
     href:string
-    }
+}
+export interface sidebarTypes{
+    icon: React.ComponentType<React.SVGProps<SVGSVGElement>>; 
+    label:string
+}

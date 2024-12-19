@@ -1,5 +1,5 @@
 import { CheckCircle2 } from "lucide-react";
-import { pricingOptions } from "../data/webData";
+import { pricingOptions } from "../data/webContent";
 
 export default function Pricing(){
     return(

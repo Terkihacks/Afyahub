@@ -1,7 +1,8 @@
 import{Menu,X} from "lucide-react"
 import { useState } from "react"
 import logo from '../assets/Logo1.jpg'
-import { navItems } from '../data/webData'
+import { navItems } from '../data/webContent'
+// import { Link } from "react-router-dom";
 export default function Navbar(){
     
     const[mobileHamOpen,SetmobileHamOpen] = useState(false);
@@ -21,6 +22,7 @@ return (
                 navItems.map((item,index)=> (
                     <li key={index}>
                     <a href={item.href}>{item.label}</a>
+                    {/* <Link to={item.href}>{item.label}</Link> */}
                     </li>
                 ))
             }

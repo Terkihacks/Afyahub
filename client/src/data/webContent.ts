@@ -1,10 +1,10 @@
-import {featureTypes, footerTypes, navTypes, priceTypes } from '../types/appTypes'
-import { Bell, Brain, ClipboardCheck, Clock, Fingerprint, Folder, Globe, Languages, Tablet, Users } from "lucide-react";
+import {featureTypes, footerTypes, navTypes, priceTypes, sidebarTypes } from '../types/appTypes'
+import { Bell, Brain, ClipboardCheck, Clock, Fingerprint, Folder, Globe, Languages, Tablet, Users, LayoutDashboard, Settings, CheckSquare } from "lucide-react";
 export const navItems:navTypes[] = [
-    { label: "Features", href: "#" },
-    { label: "Workflow", href: "#" },
-    { label: "Pricing", href: "#" },
-    { label: "Testimonials", href: "#" },
+    { label: "Features", href: "" },
+    // { label: "Workflow", href: "" },
+    { label: "Pricing", href: "" },
+    { label: "Resources", href: "" },
   ];
 //Features data
 export const features:featureTypes[] = [
@@ -120,3 +120,31 @@ export const communityLinks:footerTypes[] = [
   { href: "#", text: "Hackathons" },
   { href: "#", text: "Jobs" },
 ];
+
+//Sidebar Data
+export const sidebar:sidebarTypes[]= [
+  // {
+  //   icon:Home,
+  //   label:"Home"
+  // },
+  {
+    icon:LayoutDashboard,
+    label:"Dashboard"
+  },
+  {
+    icon:Users,
+    label:"Teams"
+  },
+  {
+    icon:CheckSquare,
+    label:"Tasks"
+  },
+  {
+    icon:Bell,
+    label:"Notifications"
+  },
+  {
+    icon:Settings,
+    label:"Settings"
+  },
+]

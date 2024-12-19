@@ -1,4 +1,4 @@
-import { communityLinks, platformLinks, resourcesLinks } from "../data/webData";
+import { communityLinks, platformLinks, resourcesLinks } from "../data/webContent";
 import { Facebook, Instagram, Twitter, Github } from "lucide-react";
 
 export default function Footer(){

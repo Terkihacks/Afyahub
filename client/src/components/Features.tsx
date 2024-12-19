@@ -1,4 +1,4 @@
-import { features } from "../data/webData"
+import { features } from "../data/webContent"
 export default function Feature(){
     return(
         <>
