@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 // import Hero from '../assets/Hero.webp'
 export default function Herosection(){
     return(
@@ -15,7 +17,13 @@ export default function Herosection(){
             improve care delivery, and revolutionize health outcomes. 
             </p>
             <div className="flex justify-centre my-10">
-                <a href="#" className="bg-gradient-to-r from-orange-500 to-red-800 py-5 mx-3 px-4 rounded-md">Join the Hub Today</a>
+                {/* <a href="#" className="bg-gradient-to-r from-orange-500 to-red-800 py-5 mx-3 px-4 rounded-md">  </a> */}
+                <Link
+             to="/register" 
+             className="bg-gradient-to-r from-orange-500 to-red-800 py-5 mx-3 px-4 rounded-md"
+        >
+        Join the Hub Today
+       </Link>
                 <a href="#" className="py-5 px-4 mx-3 rounded-md border border-white">Discover How It Works</a>
             </div>
             {/* <div className="flex mt-10 justify-center">
