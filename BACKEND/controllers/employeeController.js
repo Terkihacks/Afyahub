@@ -5,12 +5,12 @@ const bcrypt = require('bcryptjs');
 exports.createEmployee = async(req,res) =>{
     try{
     const{first_name,last_name,password,email,phone,specialization,department} = req.body;
-    const[rows] = await db.execute('SELECT * FROM employees WHERE email = ?',[email]);
+    const[rows] = await db.execute('SELECT * FROM employee WHERE email = ?',[email]);
     if(rows.length > 0) return res.status(400).json({message:'Email already exists'});
     const hashedPassword = await bcrypt.hash(password, 10);
     await db.execute(
         `
-        INSERT INTO employees (first_name,last_name,password,email,phone,specialization,department)
+        INSERT INTO employee (first_name,last_name,password,email,phone,specialization,department)
         VALUES(?,?,?,?,?,?,?)
         `,
         [first_name,last_name,hashedPassword,email,phone,specialization,department]
@@ -28,7 +28,7 @@ exports.LoginEmployee = async(req,res) =>{
    try{
        //check if the email exists
     const {email,password} = req.body;
-    const [rows] = db.execute('SELECT * FROM employees WHERE email = ?',[email]);
+    const [rows] = db.execute('SELECT * FROM employee WHERE email = ?',[email]);
     if(rows > 0) return res.status(400).json({message:'Email already exists'});
     //Check if the entered password match
     const employee = rows[0];

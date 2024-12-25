@@ -23,3 +23,16 @@ export interface sidebarTypes{
     icon: React.ComponentType<React.SVGProps<SVGSVGElement>>; 
     label:string
 }
+export interface registrationTypes{
+    first_name:string,
+    last_name:string,
+    email:string,
+    phone:string,
+    department:string,
+    specialization:string
+    password:string
+}
+export interface loginTypes{
+    email:string,
+    password:string
+}
