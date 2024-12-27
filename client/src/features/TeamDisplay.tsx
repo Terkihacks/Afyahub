@@ -1,4 +1,4 @@
-export default function AppRoutes(){
+export default function TeamComponent(){
     return(
         <>
         </>

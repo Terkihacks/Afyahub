@@ -51,6 +51,10 @@ return(
             Register
               </Link>
             </div>
+            <div>
+              <Link to = "/userdashboard">To user Dashboard</Link> {" "}
+              <Link to = "/admindashboard">To Admin Dashboard</Link>
+            </div>
           </div>
         </section>
    </div>
