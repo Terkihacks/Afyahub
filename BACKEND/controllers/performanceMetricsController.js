@@ -12,7 +12,6 @@ exports.patientOutcome = async(req,res) =>{
     try {
         const{patientsName,treatmentDate,preTreatment,postTreatment,outcomeStatus} = req.body;
         await db.execute(
-            
             `
     INSERT INTO patient_outcome(
     patient_fullname,
@@ -25,10 +24,10 @@ exports.patientOutcome = async(req,res) =>{
             `,
             [patientsName,treatmentDate,preTreatment,postTreatment,outcomeStatus]
         )
-        res.status(200).json({message:'Patient Outcomes data has been uploaded Succesfully'})
+        res.status(200).json({message:'Patient outcome data has been uploaded Succesfully'})
     } catch (error) {
         console.log(error);
-        res.status(500).jso({message:'Error uploading patients outcomes'})
+        res.status(500).json({message:'Error uploading patients outcomes'})
     }
 }
 
