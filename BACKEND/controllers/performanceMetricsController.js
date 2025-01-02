@@ -22,12 +22,12 @@ exports.patientOutcome = async(req,res) =>{
     outcome_status
             ) VALUES(?,?,?,?,?,?)
             `,
-            [patientsName,treatmentDate,preTreatment,postTreatment,outcomeStatus]
+            [patientsName,treatmentDate,preTreatment,postTreatment,outcomeStatus] 
         )
         res.status(200).json({message:'Patient outcome data has been uploaded Succesfully'})
     } catch (error) {
         console.log(error);
-        res.status(500).json({message:'Error uploading patients outcomes'})
+        res.status(500).json({message:'Error uploading patients outcomes'}) 
     }
 }
 
