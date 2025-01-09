@@ -40,7 +40,7 @@ return (
       </Link>
         </div>
         {/* Mobile menu */}
-        <div className="lg:hidden md:flex flex-col justify-end border border-white rounded-md ">
+        <div className="lg:hidden md:flex flex-col justify-end ">
             <button onClick={toggleNavbar}>
                 {mobileHamOpen ? <X/> :<Menu/>}
             </button>

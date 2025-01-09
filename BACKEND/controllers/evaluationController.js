@@ -1,7 +1,7 @@
 const db = require('../config/db');
 
 //Create 
-exports.createEvaluation = async(req,res) =>{
+exports.createEmployeeEvaluation = async(req,res) =>{
 try {
 
 } catch (error) {

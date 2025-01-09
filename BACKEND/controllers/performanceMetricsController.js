@@ -65,7 +65,7 @@ exports.procedurePerformed = async(req,res) =>{
             )VALUES(?,?,?,?)
             `,[patientsName,procedureDate,procedureType]
         )
-        res.status(200).json({message:'Task performed Successfully'})
+        res.status(200).json({message:'Tasks performed and completed Successfully'})
     } catch (error) {
         console.log(error)
         res.status(500).json({message:'Error uploading Task'})
