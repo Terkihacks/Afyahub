@@ -15,16 +15,31 @@ exports.createTeam = async(req,res) =>{
 }
 
 //Fetch teams and team members indicating their roles and department
-
 exports.getTeamMembers = async(req,res) =>{
     try{
-        
         const query = `
         SELECT 
-        
+            t.team_name,
+            t.department,
+            e.employee_name,
+            e.role
+        FROM
+            teams t,
+        JOIN
+            team_members tm ON t.id = tm.team_id
         `
+    const [rows] = await db.query(query);
+    //Send the result as a JSON response
+    res.status(200).json({
+        success:"Team members fetched successfully ",
+        data:rows,
+    })
     }catch(error){
-
+        console.log('Error fetching team Members', error)
+        res.status(500).json({
+            success: "Error Fetching Team Members",
+            message: 'Internal server error',
+        });
     }
 }
 

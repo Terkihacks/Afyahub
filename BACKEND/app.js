@@ -3,6 +3,7 @@ const dotenv = require('dotenv')
 const app = express()
 dotenv.config()
 const employeeRoutes = require('./routes/employeeRoutes')
+const teamsRoutes = require('./routes/teamRoutes')
 const performaceRoutes = require('./routes/performanceMetrricsRoutes')
 
 //This middleware is used to parse incoming requests with URL-encoded payloads (e.g., form submissions).
@@ -11,6 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use('/employee',employeeRoutes)
 app.use('/metrics',performaceRoutes)
+app.use('/teams',teamsRoutes)
 
 //Start the server
 app.listen(process.env.PORT || 5500,() =>{
