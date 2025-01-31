@@ -56,3 +56,5 @@ exports.LoginAdmin = async(req,res) =>{
      res.status(500).json({ message: 'Error logging in Employee', error });
     } 
  }
+
+//Read Profile

@@ -23,7 +23,7 @@ exports.createEmployee = async(req,res) =>{
     }
 }
 
-//Login an admin
+//Login an Employee
 exports.LoginEmployee = async(req,res) =>{
    try{
        //check if the email exists
@@ -57,6 +57,9 @@ exports.LoginEmployee = async(req,res) =>{
     res.status(500).json({ message: 'Error logging in Employee', error });
    } 
 }
+
+//Read Profile
+
 
 //Delete an Employee
 exports.DeleteEmployee = async(req,res) =>{
