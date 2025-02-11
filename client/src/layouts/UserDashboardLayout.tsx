@@ -1,7 +1,7 @@
-import AssetsCard from '../components/AssetCard';
+import AssetsCard from '../dashboardpages/AssetCard';
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
-import StatsCard from '../components/StatsCard';
+import StatsCard from '../dashboardpages/StatsCard';
 export default function UserDashboardLayout(){
     return(
  <div className="flex h-screen py-4 ">
