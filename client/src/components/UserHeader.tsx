@@ -1,12 +1,11 @@
 import { Search, Bell, Video } from 'lucide-react';
 export default function UserHeader(){
     return(   
-     <div className="flex items-center justify-between mb-8">
+     <div className="flex items-center justify-between mb-8 p-4 ">
       <div>
-        <h1 className="text-3xl font-bold">Hi, User</h1>
-        <p className="text-gray-500">In this report, you will find your HR status</p>
+        <h1 className="text-3xl font-bold">Hi, Terkiller</h1>
       </div>
-      
+
       <div className="flex items-center gap-4">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
@@ -25,4 +24,4 @@ export default function UserHeader(){
       </div>
     </div>
     )
-}
+  }
