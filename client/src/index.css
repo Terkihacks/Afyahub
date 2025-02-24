@@ -10,3 +10,17 @@
     font-family: "Poppins",sans-serif;
     color-scheme: dark;
 }
+/* Thin scrollbar for WebKit-based browsers */
+.sidebar::-webkit-scrollbar {
+    width: 5px; /* Adjust thickness */
+  }
+  
+  .sidebar::-webkit-scrollbar-thumb {
+    /* background-color: #4b5563; Gray thumb */
+    background-color: white;
+    border-radius: 10px;
+  }
+  
+  .sidebar::-webkit-scrollbar-track {
+    background: transparent;
+  }
