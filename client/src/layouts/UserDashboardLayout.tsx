@@ -3,7 +3,6 @@ import Sidebar from '../components/Sidebar';
 import UserHeader from '../components/UserHeader';
 export default function UserDashboardLayout(){
 
-
     return(
  <div className="flex h-screen dark: dark:bg-gray-900">
     {/* Sidebar */}
