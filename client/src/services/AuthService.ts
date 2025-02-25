@@ -26,9 +26,23 @@ export const getUser = () => {
 
 // Login User
 export const loginEmployee = async (loginData: { email: string; password: string }) => {
-  const API_URL = 'http://localhost:5500/employee/login';
-  const res = await axios.post(API_URL, loginData);
-  return res.data;
+  try {
+    const API_URL = 'http://localhost:5500/employee/login';
+    const res = await axios.post(API_URL, loginData);
+    if (res.data.token) {
+      // Store the token and user data
+      localStorage.setItem('token', res.data.token);
+      localStorage.setItem('employee', JSON.stringify(res.data.user));
+    }
+    return res.data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      // Handle server errors
+      throw new Error(error.response.data.message || 'Login failed');
+    }
+    // Handle network errors
+    throw new Error('Network error - unable to connect to server');
+  }
 };
 
 // Update employee

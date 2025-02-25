@@ -1,5 +1,6 @@
 const db = require('../config/db');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken')
 
 //Register a new Employee
 exports.createEmployee = async(req,res) =>{
@@ -27,11 +28,14 @@ exports.createEmployee = async(req,res) =>{
 //Login an Employee
 exports.LoginEmployee = async(req,res) =>{
    try{
+    console.log('Login attempt:', req.body);
        //check if the email exists
     const {email,password} = req.body;
-    const [rows] = db.execute('SELECT * FROM employee WHERE email = ?',[email]);
-    if(rows > 0) return res.status(400).json({message:'Email already exists'});
-    //Check if the entered password match
+    const [rows] = await db.execute('SELECT * FROM employee WHERE email = ?',[email]);
+    // Check if the employee exists
+    if (rows.length === 0) {
+      return res.status(400).json({ message: 'Employee not found' });
+    }
     const employee = rows[0];
     const isMatch = await bcrypt.compare(password,employee.password)
     //Validate the infor and sign in the employee via generating a token
@@ -42,9 +46,10 @@ exports.LoginEmployee = async(req,res) =>{
     else{
         const token = jwt.sign(
             {
-              id:user.id,
-              email:user.email,
-              first_name:user.first_name,
+              id:employee.id,
+              email:employee.email,
+              first_name:employee.first_name,
+              role: employee.role
             },
             process.env.SECRET_KEY,
             {
