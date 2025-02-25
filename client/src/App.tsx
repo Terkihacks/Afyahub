@@ -6,6 +6,9 @@ import Registration from './pages/RegistrationPage';
 import Dashboard from './pages/Dashboard';
 import AdminDashboard from './pages/AdminDashboard';
 import { AuthProvider } from './contexts/AuthContext';
+import { ToastContainer } from 'react-toastify';
+import { ProtectedRoute } from './routes/ProtectedRoutes';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   return (
@@ -16,10 +19,23 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Registration />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/userdashboard" element={<Dashboard />} />
-          <Route path="/admindashboard" element={<AdminDashboard />} />
+          <Route 
+          path="/userdashboard" 
+          element={
+            <ProtectedRoute requiredRole="empployee">
+              <Dashboard />
+            </ProtectedRoute>
+          } />
+          <Route 
+          path="/admindashboard" 
+          element={
+            <ProtectedRoute requiredRole="admin">
+              <AdminDashboard />
+            </ProtectedRoute>
+          } />
         </Routes>
       </Router>
+      <ToastContainer />
     </AuthProvider>
   );
 };

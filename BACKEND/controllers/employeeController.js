@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 //Register a new Employee
 exports.createEmployee = async(req,res) =>{
     try{
+        // console.log("Request Body:", req.body);
     const{first_name,last_name,password,email,phone,specialization,department} = req.body;
     const[rows] = await db.execute('SELECT * FROM employee WHERE email = ?',[email]);
     if(rows.length > 0) return res.status(400).json({message:'Email already exists'});

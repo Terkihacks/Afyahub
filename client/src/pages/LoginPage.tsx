@@ -1,11 +1,36 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link,useNavigate } from "react-router-dom"
+import { loginTypes } from "../types/appTypes";
+import {useAuth} from "../hooks/useAuth";	
+import { toast } from "react-toastify";
 
 export default function Login(){
-  const [values,setValues] = useState({
+  const navigate = useNavigate();
+  const {login} = useAuth();
+  const [values,setValues] = useState<loginTypes>({
     email:'',
     password:'',
   })
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const result = await login(values);
+      if (result) {
+        toast.success('Login successful');
+        // Get user role from localStorage
+        const user = JSON.parse(localStorage.getItem('employee') || '{}');
+        // Redirect based on user role
+        if (user.role === 'admin') {
+          navigate('/admindashboard');
+        } else {
+          navigate('/userdashboard');
+        }
+      }  
+    } catch {
+      toast.error('Login failed');
+    }
+  };
+
 return(
    <div className="lg:max-w-7xl mx-auto pt-20 px-6">
      <section className=" flex flex-col md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center my-2 md:mx-0 md:my-0 max-w-7xl mx-auto pt-20 px-6">
@@ -15,7 +40,8 @@ return(
               alt="Login Image" />
           </div>
           <div className="md:w-1/3 max-w-sm">
-            <div className="text-center md:text-left">
+         <form onSubmit={handleSubmit}>
+         <div className="text-center md:text-left">
               <label className="mr-1">Sign in</label>
             </div>
             <div className="my-5 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
@@ -42,8 +68,11 @@ return(
               <a className="text-blue-600 hover:text-blue-700 hover:underline hover:underline-offset-4" href="#">Forgot Password?</a>
             </div>
             <div className="text-center md:text-left">
-              <button className="mt-4 bg-blue-600 hover:bg-blue-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider" type="submit">Login</button>
+              <button
+               className="mt-4 bg-blue-600 hover:bg-blue-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider"
+               type="submit">Login</button>
             </div>
+         </form>
             <div className="mt-4 font-semibold text-sm text-slate-500 text-center md:text-left">
               Don't have an account? <Link to='/register'
                 className="text-red-600 hover:underline hover:underline-offset-4"

@@ -31,6 +31,7 @@ export interface registrationTypes{
     department:string,
     specialization:string
     password:string
+    confirmPassword:string
 }
 export interface loginTypes{
     email:string,
