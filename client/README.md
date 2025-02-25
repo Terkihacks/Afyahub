@@ -1,7 +1,7 @@
 # Afyahub Healthcare Management System
 
 ## Overview
-Afyahub is a comprehensive healthcare management system built with React, TypeScript, and Node.js. It provides a robust platform for managing healthcare facilities, staff, and patient information.
+Afyahub is a comprehensive healthcare management system built with React, TypeScript, and Node.js. It provides a robust platform for managing healthcare facilities, staff, and patient information improving the organaisation operation.
 
 ## Tech Stack
 - **Frontend:**
