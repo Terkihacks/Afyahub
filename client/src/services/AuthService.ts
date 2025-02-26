@@ -46,24 +46,24 @@ export const loginEmployee = async (loginData: { email: string; password: string
 };
 
 // Update employee
-export const updateEmployee = async (employeeData: { 
-  id: string;
-  first_name?: string;
-  last_name?: string;
-  email?: string;
-  phone?: string;
-  department?: string;
-  specialization?: string;
-  password?: string;
-}) => {
-  const API_URL = 'http://localhost:5000/employee/update';
-  const res = await axios.post(API_URL, employeeData);
-  return res.data;
-};
+// export const updateEmployee = async (employeeData: { 
+//   id: string;
+//   first_name?: string;
+//   last_name?: string;
+//   email?: string;
+//   phone?: string;
+//   department?: string;
+//   specialization?: string;
+//   password?: string;
+// }) => {
+//   const API_URL = 'http://localhost:5000/employee/update';
+//   const res = await axios.post(API_URL, employeeData);
+//   return res.data;
+// };
 
-// Delete employee
-export const deleteEmployee = async (employeeId: string) => {
-  const API_URL = `http://localhost:5000/employee/delete/${employeeId}`;
-  const res = await axios.delete(API_URL);
-  return res.data;
-};
+// // Delete employee
+// export const deleteEmployee = async (employeeId: string) => {
+//   const API_URL = `http://localhost:5000/employee/delete/${employeeId}`;
+//   const res = await axios.delete(API_URL);
+//   return res.data;
+// };

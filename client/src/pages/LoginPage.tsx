@@ -15,16 +15,19 @@ export default function Login(){
     e.preventDefault();
     try {
       const result = await login(values);
-      if (result) {
+      if (result.success) {
         toast.success('Login successful');
         // Get user role from localStorage
-        const user = JSON.parse(localStorage.getItem('employee') || '{}');
-        // Redirect based on user role
-        if (user.role === 'admin') {
-          navigate('/admindashboard');
-        } else {
-          navigate('/userdashboard');
-        }
+        const employee = JSON.parse(localStorage.getItem('employee') || '{}');
+        // Add a small delay
+        setTimeout(() => {
+          // Redirect user to dashboard
+          if (employee.role === 'admin') {
+            navigate('/admindashboard');
+          } else {
+            navigate('/userdashboard');
+          }
+        }, 1000);
       }  
     } catch {
       toast.error('Login failed');
