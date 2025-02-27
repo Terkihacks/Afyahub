@@ -56,7 +56,17 @@ exports.LoginEmployee = async(req,res) =>{
               expiresIn:'1h' //Token expires in 1 hr
             }
         )
-        res.status(200).json({ message: 'Login successful', token });
+        res.status(200).json({
+             message: 'Login successful',
+             token,
+             user: {
+               id: employee.id,
+               email: employee.email,
+               first_name: employee.first_name,
+               role: employee.role
+             } 
+
+            });
     }
    }catch(error){
     console.log(error);

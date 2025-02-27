@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { loginEmployee } from '../services/AuthService';
 import { loginTypes } from '../types/appTypes';
+// import { useNavigate } from 'react-router-dom';
 
 export const useAuth = () => {
   const [loading, setLoading] = useState(false);
@@ -12,13 +13,21 @@ export const useAuth = () => {
     try {
       const response = await loginEmployee(credentials);
       
-      if (response.token) {
-        // Store JWT token
+      if (response && response.token) {
+        const userData = {
+          ...response.user,
+          token: response.token
+        };
+        
         localStorage.setItem('token', response.token);
         // Store user data
-        localStorage.setItem('employee', JSON.stringify(response.user));
+        localStorage.setItem('employee', JSON.stringify(userData));
+        console.log('Stored user data:', userData);
         setLoading(false);
-        return response;
+        return {
+          success:true,
+          user: response.user
+        }
       }
       throw new Error('Login failed');
     } catch (err) {
@@ -31,6 +40,7 @@ export const useAuth = () => {
   const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('employee');
+    // navigate('/login');
   };
 
   const isAuthenticated = () => {

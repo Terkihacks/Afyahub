@@ -29,6 +29,7 @@ export const loginEmployee = async (loginData: { email: string; password: string
   try {
     const API_URL = 'http://localhost:5500/employee/login';
     const res = await axios.post(API_URL, loginData);
+    console.log('API Response:', res.data);
     if (res.data.token) {
       // Store the token and user data
       localStorage.setItem('token', res.data.token);

@@ -1,10 +1,14 @@
 import { Bell,Search,Video } from 'lucide-react';
 import logo from '../assets/Logo.png'
+
 export default function UserHeader(){
+  
     return(   
      <div className="flex items-center justify-between mb-8 p-4 sticky top-0 z-50 py-4 backdrop-blur-lg">
       <div>
-        <h1 className="text-3xl font-bold"></h1>
+        
+          <h1 className="text-3xl font-bold"></h1>
+      
       </div>
       <div className="flex items-center gap-8">
       <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={30} />

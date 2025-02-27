@@ -3,10 +3,12 @@ import { Link,useNavigate } from "react-router-dom"
 import { loginTypes } from "../types/appTypes";
 import {useAuth} from "../hooks/useAuth";	
 import { toast } from "react-toastify";
+// import Spinner from "../components/Spinner";
 
 export default function Login(){
   const navigate = useNavigate();
   const {login} = useAuth();
+  // const [isLoading, setIsLoading] = useState(false);
   const [values,setValues] = useState<loginTypes>({
     email:'',
     password:'',
@@ -15,26 +17,41 @@ export default function Login(){
     e.preventDefault();
     try {
       const result = await login(values);
-      if (result.success) {
-        toast.success('Login successful');
-        // Get user role from localStorage
-        const employee = JSON.parse(localStorage.getItem('employee') || '{}');
-        // Add a small delay
-        setTimeout(() => {
-          // Redirect user to dashboard
-          if (employee.role === 'admin') {
-            navigate('/admindashboard');
-          } else {
-            navigate('/userdashboard');
-          }
-        }, 1000);
-      }  
-    } catch {
+      console.log('Login response:', result); // Debugging response
+    
+      if (!result || !result.success) {
+        toast.error('Invalid credentials');
+        return;
+      }
+    
+      toast.success('Login successful');
+      const user = result.user;
+    
+      if (!user) {
+        console.error('Login response missing user:', result);
+        toast.error('Login failed: User data is missing');
+        return;
+      }
+    
+      console.log('User role:', user.role); // Debugging user role
+    
+      if (user.role === 'employee') {
+        navigate('/userdashboard');
+      } else {
+        navigate('/admindashboard');
+      }
+    } catch (error) {
+      console.error('Login error:', error); // Log error for debugging
       toast.error('Login failed');
     }
+    // finally{
+    //   setIsLoading(false);
+    // }
   };
 
 return(
+   <>
+    
    <div className="lg:max-w-7xl mx-auto pt-20 px-6">
      <section className=" flex flex-col md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center my-2 md:mx-0 md:my-0 max-w-7xl mx-auto pt-20 px-6">
           <div className="md:w-1/3 max-w-sm">
@@ -87,6 +104,7 @@ return(
           </div>
         </section>
    </div>
+   </>
         
       )
 }
