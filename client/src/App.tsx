@@ -20,14 +20,14 @@ const App = () => {
           <Route path="/register" element={<Registration />} />
           <Route path="/login" element={<Login />} />
           <Route 
-          path="/userdashboard" 
+          path="/userdashboard/*" 
           element={
             <ProtectedRoute requiredRole="employee">
               <Dashboard />
             </ProtectedRoute>
           } />
           <Route 
-          path="/admindashboard" 
+          path="/admindashboard/*"	 
           element={
             <ProtectedRoute requiredRole="admin">
               <AdminDashboard />
@@ -42,9 +42,11 @@ const App = () => {
 
 const NavbarWrapper = () => {
   const location = useLocation();
-  const hideNavbarRoutes = ['/userdashboard', '/admindashboard'];
+  // Check if the current path starts with these routes
+  const shouldHideNavbar = location.pathname.startsWith('/userdashboard') || 
+                          location.pathname.startsWith('/admindashboard');
 
-  return !hideNavbarRoutes.includes(location.pathname) ? <Navbar /> : null;
+  return shouldHideNavbar ? null : <Navbar />;
 };
 
 export default App;

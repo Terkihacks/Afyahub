@@ -1,7 +1,12 @@
-import AssetsCard from '../dashboardpages/AssetCard';
+// import AssetsCard from '../dashboardpages/AssetCard';
+import { Routes,Route } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import UserHeader from '../components/UserHeader';
 import { useState } from 'react';
+import Overview from '../dashboardpages/Overview';
+import Settings from '../features/Settings';
+import TeamDisplay from '../features/TeamDisplay';
+import TaskFeature from '../features/TaskFeature';
 
 export default function UserDashboardLayout(){
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); 
@@ -15,22 +20,20 @@ export default function UserDashboardLayout(){
   <Sidebar 
   isOpen={isMobileMenuOpen} 
   onClose={handleCloseSidebar}/>
-    {/* Page  Content */}
     <div className="flex-1 min-h-screen ml-0 lg:ml-64">  
       {/* Navbar */}
       <UserHeader onMenuClick={() => setIsMobileMenuOpen(true)}/>
-        <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-4 gap-3">   
-        <AssetsCard/>
-        </div>
-        <div className=" grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 p-4 gap-3">   
-        <AssetsCard/>
-        </div>
-        <div className=" grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 p-4 gap-3">   
-        <AssetsCard/>
-        </div> 
-      
+      {/* Page Content */}
+      <main className='p-4 '>
+        <Routes>
+        <Route path="/" element={<Overview />} />
+            <Route path="team" element={<TeamDisplay />} />
+            <Route path="taskfeature" element={<TaskFeature />} />
+            {/* <Route path="notification" element={<Messages />} /> */}
+            <Route path="settings" element={<Settings />} />
+        </Routes>
+      </main> 
       </div>
-
     </div>
 );
 }

@@ -3,18 +3,20 @@ import { Link,useNavigate } from "react-router-dom"
 import { loginTypes } from "../types/appTypes";
 import {useAuth} from "../hooks/useAuth";	
 import { toast } from "react-toastify";
+import Spinner from "../components/Spinner";
 // import Spinner from "../components/Spinner";
 
 export default function Login(){
   const navigate = useNavigate();
   const {login} = useAuth();
-  // const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [values,setValues] = useState<loginTypes>({
     email:'',
     password:'',
   })
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const result = await login(values);
       console.log('Login response:', result); // Debugging response
@@ -44,9 +46,9 @@ export default function Login(){
       console.error('Login error:', error); // Log error for debugging
       toast.error('Login failed');
     }
-    // finally{
-    //   setIsLoading(false);
-    // }
+    finally{
+      setIsLoading(false);
+    }
   };
 
 return(
@@ -89,8 +91,11 @@ return(
             </div>
             <div className="text-center md:text-left">
               <button
+               disabled ={isLoading}
                className="mt-4 bg-blue-600 hover:bg-blue-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider"
-               type="submit">Login</button>
+               type="submit">
+               {isLoading ? <Spinner text="Authenticating..." /> : 'Login'}
+                </button>
             </div>
          </form>
             <div className="mt-4 font-semibold text-sm text-slate-500 text-center md:text-left">

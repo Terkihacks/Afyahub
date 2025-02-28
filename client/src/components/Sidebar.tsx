@@ -5,6 +5,7 @@ import logo from '../assets/Logo.png'
 import { sidebar } from '../data/webContent'
 import { useAuth } from '../hooks/useAuth';
 import { X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 export interface SidebarProps {
     isOpen: boolean;
     onClose: () => void;
@@ -109,14 +110,15 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps ){
                 <div className="linkRender">
                    {sidebar.map((link,index) =>(
                     <ul key={index}>
-                        <a 
+                        <Link
+                        to = {link.path}
                         className="flex items-center px-3 py-3 my-6 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                        href="">
+                        >
                             <link.icon/>
                             <span className='mx-2 text-sm font-medium'>
                              {link.label}
                             </span>
-                        </a>
+                        </Link>
                     </ul>
                    ))}
                 </div>

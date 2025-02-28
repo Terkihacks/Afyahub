@@ -127,23 +127,26 @@ export const sidebar:sidebarTypes[]= [
   //   icon:Home,
   //   label:"Home"
   // },
-  {
+  { path: '/userdashboard',
     icon:LayoutDashboard,
     label:"Dashboard"
   },
-  {
+  { path: '/userdashboard/team',
     icon:Users,
     label:"Teams"
   },
-  {
+  { 
+    path: '/userdashboard/taskfeature',
     icon:CheckSquare,
     label:"Tasks"
   },
   {
+    path: '/userdashboard',
     icon:Bell,
     label:"Notifications"
   },
   {
+    path: '/userdashboard/settings',
     icon:Settings,
     label:"Settings"
   },

@@ -36,9 +36,7 @@ export default function AssetsCard(){
               <li><a href="#" className="text-blue-600 hover:underline">Schedule an Appointment</a></li>
               <li><a href="#" className="text-blue-600 hover:underline">View Messages</a></li>
             </ul>
-          </div>
-          
-          
+          </div>      
     </>
 
     )

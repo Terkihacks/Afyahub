@@ -22,6 +22,7 @@ export interface footerTypes{
 export interface sidebarTypes{
     icon: React.ComponentType<React.SVGProps<SVGSVGElement>>; 
     label:string
+    path:string
 }
 export interface registrationTypes{
     first_name:string,
