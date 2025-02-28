@@ -49,7 +49,8 @@ exports.LoginEmployee = async(req,res) =>{
               id:employee.id,
               email:employee.email,
               first_name:employee.first_name,
-              role: employee.role
+              last_name:employee.last_name,
+              role: employee.role 
             },
             process.env.SECRET_KEY,
             {
@@ -63,6 +64,7 @@ exports.LoginEmployee = async(req,res) =>{
                id: employee.id,
                email: employee.email,
                first_name: employee.first_name,
+               last_name:employee.last_name,
                role: employee.role
              } 
 

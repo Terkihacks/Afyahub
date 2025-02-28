@@ -1,16 +1,76 @@
 // import { LogOut} from 'lucide-react'
 // import { useState } from 'react'
+import { useEffect, useRef } from 'react';
 import logo from '../assets/Logo.png'
 import { sidebar } from '../data/webContent'
+import { useAuth } from '../hooks/useAuth';
+import { X } from 'lucide-react';
+export interface SidebarProps {
+    isOpen: boolean;
+    onClose: () => void;
+  }
 
-export default function Sidebar(){
+export default function Sidebar({ isOpen, onClose }: SidebarProps ){
+    const { isAuthenticated, getUser } = useAuth();
+    const sidebarRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (isOpen && 
+          sidebarRef.current && 
+          !sidebarRef.current.contains(event.target as Node)) {
+        onClose();
+      }
+    }
+
+     // Add event listener only when sidebar is open
+     if (isOpen) {
+        document.addEventListener('mousedown', handleClickOutside);
+    }
+      // Cleanup function
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen, onClose]);
     return(
         <>
-    <div className="sidebar fixed w-64 h-screen overflow-y-auto  flex flex-col shadow-md dark:bg-gray-900 dark:border-gray-700 border-gray-200 ">
+        {/* Overlay for mobile */}
+      {isOpen && (
+        <div 
+        className={`
+            fixed inset-0 bg-black/30 backdrop-blur-sm z-40 lg:hidden
+            transition-opacity duration-300 ease-in-out
+            ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}
+          `}
+          onClick={onClose}
+          aria-hidden="true"
+        />
+      )}
+    
+    <div 
+    ref={sidebarRef}
+    className= {
+        `
+        sidebar fixed  w-64 h-screen overflow-y-auto 
+         flex flex-col shadow-md dark:bg-gray-900
+         dark:border-gray-700 border-gray-200
+         z-50
+         transition-transform duration-300 ease-in-out
+         ${isOpen ? 'translate-x-0' : '-translate-x-full '}
+         lg:translate-x-0
+        `
+    }>
         {/* Logo Section */}
         <div className="flex items-centre flex-shrink-0 px-3">
             <h1 className='text-4xl text-centre font-bold py-2 px-2 text-[#00AB55]'>Afyahub</h1>
         </div>
+        {/* Close button for mobile */}
+        <button 
+          onClick={onClose}
+          className="lg:hidden absolute right-4 top-4 p-2 hover:bg-gray-100 rounded-full"
+        >
+          <X size={24} />
+        </button>
         
         <div className='flex items-center dark:bg-gray-800 p-3 rounded-lg gap-4 h-[8%] mt-10 mx-4 sm:flex-nowrap max-w-sm '>
     {/* Profile Image Container */}
@@ -28,10 +88,18 @@ export default function Sidebar(){
     </div>
     {/* User Info */}
     <div className="text-center sm:text-left py-2">
-        <h6 className="font-semibold  text-sm">Raymond Munguti</h6>
-        <p className="text-gray-500  text-sm ">Employee</p>
-        {/* <LogOut className="w-5 h-5" strokeWidth="1.5" /> */}
-    </div>
+  {isAuthenticated() && getUser() ? (
+    <>
+      <h6 className="font-semibold text-sm">
+      {[getUser()?.first_name, getUser()?.last_name].join("  ")}
+      </h6>
+      <p className="text-gray-500 text-sm">{getUser()?.role}</p>
+    </>
+  ) : (
+    <h6 className="font-semibold text-sm">Employer</h6>
+  )}
+</div>
+
 </div>
 
         <div className="flex flex-col justify-between flex-1 mt-6">
