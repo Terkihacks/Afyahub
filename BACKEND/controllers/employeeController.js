@@ -77,6 +77,9 @@ exports.LoginEmployee = async(req,res) =>{
 }
 
 //Read Profile
+exports.readEmployee = async(req,res) =>{
+  
+}
 
 
 //Delete an Employee
