@@ -1,7 +1,7 @@
 import { Users, Calendar, Clock, CheckCircle } from 'lucide-react';
 import { DashboardCard } from '../cards/DashboardCard';
 
-export function StatsGrid() {
+export  function StatsGrid() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
       <DashboardCard
