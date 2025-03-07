@@ -77,16 +77,114 @@ exports.LoginEmployee = async(req,res) =>{
 }
 
 //Read Profile
-exports.readEmployee = async(req,res) =>{
-  
+exports.ReadEmployee = async(req,res) =>{
+  try {
+    // Get employee ID from the authenticated user's token
+    const employeeId = req.user.id;
+
+    // Query to get employee details
+    const [rows] = await db.execute(
+      `SELECT id, first_name, last_name, email, phone, specialization, 
+      department, role, created_at
+      FROM employee WHERE id = ?`,
+      [employeeId]
+    );
+
+    // Check if employee exists
+    if (rows.length === 0) {
+      return res.status(404).json({ message: 'Employee not found' });
+    }
+
+    // Return employee data (excluding password)
+    const employee = rows[0];
+    res.status(200).json({
+      status: 'success',
+      data: {
+        id: employee.id,
+        first_name: employee.first_name,
+        last_name: employee.last_name,
+        email: employee.email,
+        phone: employee.phone,
+        specialization: employee.specialization,
+        department: employee.department,
+        role: employee.role,
+        created_at: employee.created_at
+      }
+    });
+
+  } catch (error) {
+    console.error('Error fetching employee profile:', error);
+    res.status(500).json({ 
+      status: 'error',
+      message: 'Error fetching employee profile',
+      error: error.message 
+    });
+  }
 }
+
+// Update Profile
 
 
 //Delete an Employee
-exports.DeleteEmployee = async(req,res) =>{
-    try{
+exports.DeleteOwnAccount = async(req,res) =>{
+    try {
+        // Get employee ID from authenticated user's token
+        const employeeId = req.user.id;
+        // Require password confirmation for security
+        // const { password } = req.body;
+        // if (!password) {
+        //     return res.status(400).json({
+        //         status: 'error',
+        //         message: 'Password confirmation is required'
+        //     });
+        // }
 
-    }catch(error){
-        
+        // Verify employee and password
+        // const [employee] = await db.execute(
+        //     'SELECT password FROM employee WHERE id = ?',
+        //     [employeeId]
+        // );
+
+        if (employee.length === 0) {
+            return res.status(404).json({
+                status: 'error',
+                message: 'Employee not found'
+            });
+        }
+
+        // Verify password
+        // const isValidPassword = await bcrypt.compare(password, employee[0].password);
+        // if (!isValidPassword) {
+        //     return res.status(401).json({
+        //         status: 'error',
+        //         message: 'Invalid password'
+        //     });
+        // }
+
+        // Perform the delete operation
+        const [result] = await db.execute(
+            'DELETE FROM employee WHERE id = ?',
+            [employeeId]
+        );
+
+        if (result.affectedRows === 0) {
+            return res.status(400).json({
+                status: 'error',
+                message: 'Failed to delete account'
+            });
+        }
+
+        res.status(200).json({
+            status: 'success',
+            message: 'Your account has been deleted successfully'
+        });
+
+    } catch (error) {
+        console.error('Error deleting account:', error);
+        res.status(500).json({
+            status: 'error',
+            message: 'Error deleting account',
+            error: error.message
+        });
     }
 }
