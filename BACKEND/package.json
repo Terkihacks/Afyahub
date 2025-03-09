@@ -18,7 +18,8 @@
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
     "mysql": "^2.18.1",
-    "mysql2": "^3.11.5"
+    "mysql2": "^3.11.5",
+    "node-cache": "^5.1.2"
   },
   "devDependencies": {
     "mocha": "^11.1.0",

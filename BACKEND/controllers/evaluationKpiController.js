@@ -1,4 +1,6 @@
-const db = require('../config/db');
+const cache = require('../middleware/cacheMiddleware');
+const {patientSatisfaction,patientOutcome} = require('../utils/employeeKpis');
+// const handleControllerError = require('../utils/errorHandler');
 /*
 KPI to implement(Employees Only)
 patient_feedback
@@ -17,114 +19,40 @@ patients follow-up rate
 patient safety
  */
 //Employee  KPI
-exports.patientFeedback = async(req,res) =>{
-try {
-    // Request the body
-    const {employee_id,patient_fullname,feedback_date,satisfaction_score,comments} = req.body
-    await db.execute(
-        `
-        INSERT INTO patient_feedback (employee_id,patient_fullname,feedback_date,satisfaction_score,comments)
-        VALUES(?,?,?,?,?)
-        `,
-        [employee_id,patient_fullname,feedback_date,satisfaction_score,comments]
-    )
-    res.status(200).json({message:"Feedback has been Successfully receieved"})
-} catch (error) {
-    console.log(error);
-        console.error('Submission  error:', error.message || error);
-        res.status(500).json({ message: 'Error submitting feedback', error });
-}
-}
-
-exports.patientOutcome = async(req,res) =>{
-    try {
-        const{patient_fullname,employee_id,treatment_date,pre_treatment_metrics,post_treatment_metrics,outcome_status} = req.body;
-        await db.execute(
-        `
-        INSERT INTO patient_feedback (patient_fullname,employee_id,treatment_date,pre_treatment_metrics,post_treatment_metrics,outcome_status)
-        VALUES(?,?,?,?,?)
-            `,
-            [patient_fullname,employee_id,treatment_date,pre_treatment_metrics,post_treatment_metrics,outcome_status]
-        )
-    } catch (error) {
-        
-    }
-}
-
-exports.deathRates = async(req,res) =>{
-    try {
-    
-    } catch (error) {
-        
-    }
-}
-exports.medicationErrors = async(req,res) =>{
-    try {
-    
-    } catch (error) {
-        
-    }
-    
-}
-exports.dischargewaitTimes = async(req,res) =>{
-        try {
-        
-        } catch (error) {
-            
+exports.calculateEmployeeKPIs= async(req,res) =>{
+    try{
+        const {employee_id} = req.params;
+        const cacheKey = `kpi:${employee_id}`;
+        const cachedData = await cache.get(cacheKey);
+        if (cachedData) {
+            return res.status(200).json({
+                ...cachedData,
+                fromCache: true
+            });
         }
-}
-
-// Hospital Team KPI
-exports.procedures = async(req,res) =>{
-
-    try {
-    
-    } catch (error) {
+        // Fetch KPIs in Parallel for better performance
+        const [feedbackScore,patientOutcome] = await Promise.all([
+            patientSatisfaction(employee_id),
+            patientOutcome(employee_id)
+        ]);
         
+        const kpiData = {
+            employee_id,
+            feedbackScore,
+            patientOutcome,
+            calculatedAt: new Date().toISOString()
+        };
+
+        // Store in cache
+        await cache.set(cacheKey, kpiData);
+        return res.status(200).json(kpiData);
+
     }
-}
-
-exports.incidents = async(req,res) =>{
-
-    try {
-    
-    } catch (error) {
-        
+    catch(error){
+        console.error(error);
+        res.status(500).json({ message: 'Server Error' });
     }
+
 }
-exports.readmissionrates = async(req,res) =>{
-
-    try {
-    
-    } catch (error) {
-        
-    }
-}
-exports.patientReferrals = async(req,res) =>{
-
-    try {
-    
-    } catch (error) {
-        
-    }
-}
-exports.patientSafety = async(req,res) =>{
-
-    try {
-    
-    } catch (error) {
-        
-    }
-}
-
-exports.patientFollowupRate = async(req,res) =>{
-
-    try {
-    
-    } catch (error) {
-        
-    }
-}
-
 
 
