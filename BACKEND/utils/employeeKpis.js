@@ -15,7 +15,6 @@ const patientSatisfaction = async (employee_id) => {
 }
 
 // Patient Outcome Score
-
 const patientOutcome = async (employee_id) => {
     const[outcomes] = await db.execute(
         `

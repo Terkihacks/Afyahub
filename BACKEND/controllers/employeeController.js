@@ -10,13 +10,12 @@ exports.createEmployee = async(req,res) =>{
     const[rows] = await db.execute('SELECT * FROM employee WHERE email = ?',[email]);
     if(rows.length > 0) return res.status(400).json({message:'Email already exists'});
     const hashedPassword = await bcrypt.hash(password, 10);
+    
     await db.execute(
-        `
-        INSERT INTO employee (first_name,last_name,password,email,phone,specialization,department)
-        VALUES(?,?,?,?,?,?,?)
-        `,
-        [first_name,last_name,hashedPassword,email,phone,specialization,department]
-    )
+      `INSERT INTO employee (first_name, last_name, password, email, phone, specialization, department) 
+       VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      [first_name, last_name, hashedPassword, email, phone, specialization, department]
+  );
     res.status(200).json({ message: 'Account registered successfully'});
     }catch(error){
         console.log(error);
