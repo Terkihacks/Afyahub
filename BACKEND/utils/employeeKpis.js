@@ -5,7 +5,7 @@ const patientSatisfaction = async (employee_id) => {
     const [feedback] = await db.execute(
         `
         SELECT 
-            AVG(satisfaction_score) as averageRating
+        AVG(satisfaction_score) as averageRating
         FROM patient_feedback
         WHERE employee_id = ?
         `,

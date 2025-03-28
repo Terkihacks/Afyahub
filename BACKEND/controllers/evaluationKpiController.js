@@ -20,39 +20,15 @@ patient safety
  */
 //Employee  KPI
 exports.calculateEmployeeKPIs= async(req,res) =>{
-    try{
-        const {employee_id} = req.params;
-        const cacheKey = `kpi:${employee_id}`;
-        const cachedData = await cache.get(cacheKey);
-        if (cachedData) {
-            return res.status(200).json({
-                ...cachedData,
-                fromCache: true
-            });
-        }
-        // Fetch KPIs in Parallel for better performance
-        const [feedbackScore,patientOutcome] = await Promise.all([
-            patientSatisfaction(employee_id),
-            patientOutcome(employee_id)
-        ]);
-        
-        const kpiData = {
-            employee_id,
-            feedbackScore,
-            patientOutcome,
-            calculatedAt: new Date().toISOString()
-        };
-
-        // Store in cache
-        await cache.set(cacheKey, kpiData);
-        return res.status(200).json(kpiData);
-
-    }
-    catch(error){
-        console.error(error);
-        res.status(500).json({ message: 'Server Error' });
-    }
-
+    // Use the utils functions to calculate the KPIs
+    const patientSatisfactionKpi = patientSatisfaction();
+    const patientOutcomeKpi = patientOutcome();
+    //Return the KPIs
+    res.status(200).json({
+        patientSatisfactionKpi,
+        patientOutcomeKpi
+    })
+    
 }
 
 

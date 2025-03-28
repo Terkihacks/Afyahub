@@ -5,7 +5,7 @@ const cors = require("cors");
 dotenv.config()
 const employeeRoutes = require('./routes/employeeRoutes')
 const teamsRoutes = require('./routes/teamRoutes')
-// const performaceRoutes = require('./routes/performanceMetrricsRoutes')
+const evaluationKpiRoutes = require('./routes/evaluationKpiRoutes')
 app.use(cors()); 
 
 //This middleware is used to parse incoming requests with URL-encoded payloads (e.g., form submissions).
@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 //This middleware is used to parse incoming requests with JSON payloads (typically in application/json format).
 app.use(express.json());
 app.use('/employee',employeeRoutes)
-// app.use('/metrics',performaceRoutes)
+app.use('/metrics',evaluationKpiRoutes)
 app.use('/teams',teamsRoutes)
 
 //Start the server
