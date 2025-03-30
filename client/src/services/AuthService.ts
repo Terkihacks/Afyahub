@@ -30,7 +30,8 @@ export const loginEmployee = async (loginData: { email: string; password: string
   try {
     // Artificial delay for better UX
     await new Promise(resolve => setTimeout(resolve, 1000));
-    const API_URL = 'http://localhost:5500/employee/login';
+    // const API_URL = 'http://localhost:5500/employee/login';
+    const API_URL = 'https://afyabackend.vercel.app/employee/login';
     const res = await axios.post(API_URL, loginData);
     console.log('API Response:', res.data);
     if (res.data.token) {
