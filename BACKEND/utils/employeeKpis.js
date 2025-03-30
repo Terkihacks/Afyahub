@@ -1,5 +1,21 @@
 const db = require('../config/db');  // Import the database connection
+/*
+KPI to implement(Employees Only)
+patient_feedback
+patient_outcome
+death rates
+medication errors
+discharge wait times
 
+// Hospital Team
+procedures
+incidents
+readmission rates 
+admission rates
+patient referrals
+patients follow-up rate
+patient safety
+ */
 // Patient Satisfaction KPI
 const patientSatisfaction = async (employee_id) => {
     const [feedback] = await db.execute(
@@ -32,9 +48,23 @@ const patientOutcome = async (employee_id) => {
     : 0;
 }
 
+//Incident Rate
+const incidentRate = async (employee_id) => {
+    const [incidents] = await db.execute(
+        `
+        SELECT 
+        COUNT(*) as totalIncidents
+        FROM incidents
+        WHERE employee_id = ?
+        `,
+        [employee_id]
+    )
+    return incidents[0].totalIncidents || 0;
+}
 
 
 module.exports = {
     patientSatisfaction,
-    patientOutcome
+    patientOutcome,
+    incidentRate
 }
