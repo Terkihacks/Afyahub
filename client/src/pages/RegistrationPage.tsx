@@ -68,7 +68,7 @@ return(
                      <div>
                          <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Last name</label>
                          <input type="text"
-                            name="last_name"
+                         name="last_name"
                          value={data.last_name}
                          onChange={handleChange}
                          placeholder="Doe" 
