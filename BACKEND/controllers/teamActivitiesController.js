@@ -17,29 +17,49 @@ exports.createTeamActivity = async(req,res) =>{
 }
 
 //Read Team Activity
-exports.getActivities = async(req,res) =>{
+exports.getActivities = async (req, res) => {
     try {
+        // SELECT * FROM teamactivities ORDER BY start_date DESC
         const query = `
         SELECT 
-            activity_name,
-            description,
-            start_date,
-            end_date
-        `
-        const[rows] = await db.query(query);
-        res.status(200).json({
-            sucess:"Activities fetched successfully",
-            data:rows,
-        })
+                ta.id,
+                ta.team_id,
+                t.team_name,
+                ta.activity_name,
+                ta.description,
+                DATE_FORMAT(ta.start_date, '%Y-%m-%d') as start_date,
+                DATE_FORMAT(ta.end_date, '%Y-%m-%d') as end_date,
+                DATE_FORMAT(ta.created_at, '%Y-%m-%d %H:%i') as created_at
+            FROM 
+                teamactivities ta
+            INNER JOIN 
+                team t ON ta.team_id = t.id
         
+        `;
+        const [activities] = await db.query(query);
+
+        if (!activities.length) {
+            return res.status(404).json({
+                success: false,
+                message: 'No team activities found'
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Activities fetched successfully",
+            data: activities
+        });
     } catch (error) {
-        console.log('Error Fetching Team Activities');
+        console.error('Error fetching team activities:', error);
         res.status(500).json({
-            success: "Error Fetching Team Activities",
-            message: 'Internal server error',
-        })
+            success: false,
+            message: 'Error fetching team activities',
+            error: error.message
+        });
     }
-}
+};
+
 
 //Update Team Activity
 exports.updateActivities = async(req,res)=>{

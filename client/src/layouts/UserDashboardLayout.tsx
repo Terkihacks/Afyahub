@@ -5,6 +5,7 @@ import UserHeader from '../components/UserHeader';
 import Overview from '../dashboardpages/Overview';
 import TeamDisplay from '../features/TeamDisplay';
 import TaskFeature from '../features/TaskFeature';
+import Settings from '../features/Settings';
 
 
 export default function UserDashboardLayout() {
@@ -26,6 +27,8 @@ export default function UserDashboardLayout() {
             <Route path="/" element={<Overview />} />
             <Route path="team" element={<TeamDisplay />} />
             <Route path="taskfeature" element={<TaskFeature />} />
+            <Route path="settings" element={<Settings />} />
+            <Route path="*" element={<div>Page Not Found</div>} />
           </Routes>
         </main>
       </div>

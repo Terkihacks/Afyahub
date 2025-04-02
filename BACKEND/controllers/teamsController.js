@@ -42,5 +42,30 @@ exports.getTeamMembers = async(req,res) =>{
         });
     }
 }
+//Get teams
 
+exports.getTeams = async(req,res) =>{
+    //Get all teams
+    try{
+        const [rows] = await db.execute('SELECT * FROM team')
+        res.status(200).json({
+            success: "Teams fetched successfully",
+            data: rows,
+        })
+    }catch(error){
+        console.log('Error fetching teams', error)
+        res.status(500).json({message: 'Error fetching teams', error})
+    }
+}
 
+exports.deleteTeam = async(req,res) =>{
+    //Delete a team
+    try{
+        const {id} = req.id;
+        await db.execute('DELETE FROM teams WHERE id = ?',[id])
+        res.status(200).json({message: 'Team deleted successfully'})
+    }catch(error){
+        console.log('Error deleting team', error)
+        res.status(500).json({message: 'Error deleting team', error})
+    }
+}

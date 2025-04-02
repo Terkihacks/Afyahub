@@ -1,9 +1,11 @@
 const express  = require('express');
 const router =  express.Router();
-const {createTeam,getTeamMembers} = require('../controllers/teamsController');
+const {createTeam,getTeamMembers,getTeams} = require('../controllers/teamsController');
+
 
 //API
 router.post('/createTeam',createTeam);
-router.get('/getTeam',getTeamMembers)
+router.get('/getTeamMembers',getTeamMembers);
+router.get('/getTeams',getTeams);
 
 module.exports = router;
