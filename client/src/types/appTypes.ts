@@ -38,3 +38,7 @@ export interface loginTypes{
     email:string,
     password:string
 }
+export interface admninloginTypes{
+    email:string,
+    password:string
+}

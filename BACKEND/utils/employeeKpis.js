@@ -62,6 +62,20 @@ const incidentRate = async (employee_id) => {
     return incidents[0].totalIncidents || 0;
 }
 
+//medication errors
+const medicationErrors = async (employee_id) => {
+    const [errors] = await db.execute(
+        `
+        SELECT 
+        COUNT(*) as totalErrors
+        FROM medication_errors
+        WHERE employee_id = ?
+        `,
+        [employee_id]
+    )
+    return errors[0].totalErrors || 0;
+}
+
 
 module.exports = {
     patientSatisfaction,
