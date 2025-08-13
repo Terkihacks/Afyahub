@@ -39,6 +39,7 @@ const App = () => {
   );
 };
 
+
 const NavbarWrapper = () => {
   const location = useLocation();
   // Check if the current path starts with these routes

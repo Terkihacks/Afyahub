@@ -1,6 +1,6 @@
 import{Menu,X} from "lucide-react"
 import { useState } from "react"
-import logo from '../assets/Logo1.jpg'
+// import logo from '../assets/Logo1.jpg'
 import { navItems } from '../data/webContent'
 import { Link } from "react-router-dom";
 export default function Navbar(){
@@ -15,7 +15,8 @@ return (
 <div className="container px-4 mx-auto relative text-sm">
     <div className="flex justify-between items-centre">
         <div className="flex items-centre flex-shrink-0">
-            <img className='h-10 w-25 mr-2 rounded-lg ' src={logo} alt="" />
+            {/* <img className='h-10 w-25 mr-2 rounded-lg ' src={logo} alt="" /> */}
+            AFYAHUB
         </div>
         <ul className="hidden lg:flex items-center ml-14 space-x-12">
             {

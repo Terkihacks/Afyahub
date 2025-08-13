@@ -15,7 +15,7 @@ export function DashboardCard({
   value,
   icon,
   trend,
-  trendLabel,
+  trendLabel, 
   className
 }: DashboardCardProps) {
   const isPositiveTrend = trend && trend > 0;
